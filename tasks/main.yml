@@ -1,0 +1,35 @@
+---
+- name: Install Apache
+  become: yes
+  notify: restart apache
+  apt: pkg=apache2 state=latest
+
+- name: Install Apache Modules
+  apache2_module: state=present name={{ item }}
+  notify: restart apache
+  with_items:
+    - rewrite
+    - vhost_alias
+    - headers
+    - expires
+    - filter
+    - ssl
+
+#- name: Change apache envvars user
+#  become: true
+#  lineinfile:
+#    dest: /etc/apache2/envvars
+#    state: present
+#    regexp: "{{ item.regexp }}"
+#    line: "{{ item.line }}"
+#  with_items:
+#    - { regexp: '^export APACHE_RUN_USER=', line: 'export APACHE_RUN_USER=vagrant'}
+#    - { regexp: '^export APACHE_RUN_GROUP=', line: 'export APACHE_RUN_GROUP=vagrant'}
+
+- name: Copying apache2.conf
+  template: src=etc/apache2/apache2.conf.j2 dest=/etc/apache2/apache2.conf
+  sudo: true
+
+- name: Chown to www_root dir
+  file: path={{ www_root }} owner={{ ansible_user }} group=www-data mode=0755 state=directory
+  become: yes
