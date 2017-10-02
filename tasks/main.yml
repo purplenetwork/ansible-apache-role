@@ -29,7 +29,7 @@
 
 - name: Copying apache2.conf
   template: src=etc/apache2/apache2.conf.j2 dest=/etc/apache2/apache2.conf
-  sudo: true
+  become: true
 
 #- name: Chown to www_root dir
 #  file: path={{ www_root }} group=www-data mode=0755 state=directory
