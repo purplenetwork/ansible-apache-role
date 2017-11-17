@@ -15,6 +15,7 @@
     - expires
     - filter
     - ssl
+    - proxy
 
 #- name: Change apache envvars user
 #  become: true
