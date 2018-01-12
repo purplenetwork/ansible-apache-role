@@ -239,3 +239,16 @@ IncludeOptional conf-enabled/*.conf
 IncludeOptional sites-enabled/*.conf
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+
+<LocationMatch "/_status5.6">
+     SetHandler handler5.6
+     Action handler1 /php5.6-fcgi virtual
+</LocationMatch>
+<LocationMatch "/_status7.0">
+     SetHandler handler7.0
+     Action nome-handler2 /php7.0-fcgi virtual
+</LocationMatch>
+<LocationMatch "/_status7.1">
+     SetHandler handler7.1
+     Action handler7.1 /php7.1-fcgi virtual
+</LocationMatch>
