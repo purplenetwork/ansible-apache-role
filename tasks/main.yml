@@ -16,6 +16,7 @@
     - filter
     - ssl
     - proxy
+    - proxy_http
 
 #- name: Change apache envvars user
 #  become: true
