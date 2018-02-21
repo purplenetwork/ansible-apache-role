@@ -9,6 +9,7 @@
   notify: restart apache
   become: true
   with_items:
+    - actions
     - rewrite
     - vhost_alias
     - headers
