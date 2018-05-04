@@ -34,6 +34,14 @@
   template: src=etc/apache2/apache2.conf.j2 dest=/etc/apache2/apache2.conf
   become: true
 
+- name: Copying index.html (with No vhost configurated)
+  template: src=etc/apache2/index.html dest=/var/www/index.html
+  become: true
+
+- name: Copying 000-default.conf (with security settings)
+  template: src=etc/apache2/000-default.conf.j2 dest=/etc/apache2/sites-available/000-default.conf
+  become: true
+
 #- name: Chown to www_root dir
 #  file: path={{ www_root }} group=www-data mode=0755 state=directory
 #  become: yes
