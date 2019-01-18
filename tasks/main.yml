@@ -16,6 +16,7 @@
     - expires
     - filter
     - ssl
+    - xml2enc
     - proxy
     - proxy_http
 
