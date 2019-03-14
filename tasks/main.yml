@@ -46,3 +46,16 @@
 #- name: Chown to www_root dir
 #  file: path={{ www_root }} group=www-data mode=0755 state=directory
 #  become: yes
+
+- name: Test for line
+  shell: grep "umask 0002" /etc/apache2/envvars
+  register: test_grep_umask
+
+- name: Set default umask to 0002 on www-data
+  become: true
+  lineinfile:
+    dest: /etc/apache2/envvars
+    insertafter: EOF
+    state: present
+    line: umask 0002
+  when: test_grep_umask.stdout != ""
